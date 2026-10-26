@@ -9,14 +9,14 @@ Prints all comparison records and highlights flagged anomalies.
 
 Run with:
     cd backend
-    python test_agents.py
+    python manual_checks/check_agents.py
 """
 
 import asyncio
 import os
 import sys
 
-sys.path.insert(0, os.path.dirname(__file__))
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from agents.anomaly import AnomalyDetectorAgent
 from agents.comparison import ComparisonAgent

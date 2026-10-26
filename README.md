@@ -252,15 +252,47 @@ payroll-anomaly-detector/
 │   ├── tools/
 │   ├── schemas/
 │   ├── session_store/
+│   ├── tests/            # pytest unit tests (no ERPNext / LLM needed)
+│   ├── manual_checks/    # scripts run against a live ERPNext instance
 │   └── main.py
 │
 ├── frontend/
 │
 ├── requirements.txt
+├── requirements-dev.txt
 ├── README.md
 ├── SETUP.md
 └── .env.example
 ```
+
+---
+
+# Testing
+
+```bash
+pip install -r requirements-dev.txt
+cd backend
+pytest
+```
+
+`backend/tests/` holds unit tests for `AnomalyDetectorAgent`, the deterministic
+rule engine that decides whether a payroll record is suspicious. Because the
+detection rules are a pure function of a `ComparisonRecord` — and deliberately
+not an LLM prompt — the suite runs with no ERPNext instance, no network access
+and no API keys.
+
+Covered:
+
+* new employee and missing slip detection, including their early return
+* the net-pay threshold, in both directions, and its exclusive boundary
+* threshold override vs. the value from `ANOMALY_THRESHOLD_PCT`
+* all three deduction rules, and the cases they intentionally stay quiet on
+* multiple rules firing on one record
+* the filtering contract of `run()` and the reason counts in `summary_stats()`
+
+`backend/manual_checks/` contains the exploratory scripts used while building
+the ERPNext integration. They print rather than assert, and need live ERPNext
+and Groq credentials, so they are kept out of the automated suite.
 
 ---
 
@@ -291,10 +323,7 @@ https://www.loom.com/share/5ee5ac69bdc44774b69e156534557c54
 
 # Setup Instructions
 
-Detailed setup instructions are available in:
-
-
-SETUP.md
+Detailed setup instructions are available in [SETUP.md](SETUP.md).
 
 
 ---

@@ -11,7 +11,7 @@ Verifies:
 
 Run with:
     cd backend
-    python test_connection.py
+    python manual_checks/check_connection.py
 """
 
 import asyncio
@@ -19,7 +19,7 @@ import sys
 import os
 
 # Make sure we can import from backend/
-sys.path.insert(0, os.path.dirname(__file__))
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from config import settings
 from services.erpnext_client import erpnext, ERPNextError

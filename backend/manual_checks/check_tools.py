@@ -8,14 +8,14 @@ the anomaly you created in ERPNext is visible.
 
 Run with:
     cd backend
-    python test_tools.py
+    python manual_checks/check_tools.py
 """
 
 import asyncio
 import sys
 import os
 
-sys.path.insert(0, os.path.dirname(__file__))
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from tools.erpnext_tools import (
     fetch_salary_slips_current_month,
