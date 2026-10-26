@@ -27,3 +27,11 @@ coverage.xml
 
 # VS Code
 .vscode/
+
+# Local databases (Agno session storage, etc.)
+*.db
+*.sqlite
+*.sqlite3
+
+# Personal interview notes — not for the public repo
+INTERVIEW_PREP.md

@@ -10,7 +10,7 @@ Verifies that PayrollAnalysisTeam and PayrollOrchestrator work correctly:
 
 Run with:
     cd backend
-    python test_team.py
+    python manual_checks/check_team.py
 """
 
 import asyncio
@@ -18,7 +18,7 @@ import logging
 import os
 import sys
 
-sys.path.insert(0, os.path.dirname(__file__))
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 logging.basicConfig(
     level=logging.INFO,
